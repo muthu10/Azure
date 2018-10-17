@@ -1,0 +1,9 @@
+
+Server=(localdb)\mssqllocaldb;Database=ImageGallery;Trusted_Connection=True
+
+PM>Add-Migration "InitialCreate"
+PM> Update-Database
+
+Redis-x64-3.2.100
+fastoredis-1.18.2-x86_64
+

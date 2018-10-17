@@ -1,0 +1,438 @@
+https://github.com/sonusathyadas/
+https://streamingskills.blog - reference
+https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator
+
+3.6.8
+mongo Db path
+
+C:\Program Files\MongoDB\Server\3.4\bin
+
+> mongod.exe --dbpath "C:\data\db"
+
+dbpath "C:\data\db"
+
+show db;
+use 
+
+Aggregation
+--------------
+1. aggregate pipeline
+2. map reduce
+3. single purpose function
+
+how many states are there in each region?
+
+CCH1WPADFS03
+
+DotNet Core
+--------------
+to check the cmd tool
+>dotnet -v
+>dotnet new
+
+create new project
+-------------------
+>dotnet new console
+>dotnet new console -o myApp
+>dotnet restore
+
+to build the application
+--------------------
+>dotnet build
+>dotnet run
+>dotnet publish
+
+Middleware
+-------------
+Use - process all the request
+map - procss only a particular request based on the url
+run- terminate the request flow
+
+Inbuilt middleware
+-----------------
+Default File
+staticFiles
+directBrowsing
+
+.Net Configuration
+------------------
+keyvault
+INI
+xml
+json
+inMemory
+EF Database
+Environment Variables
+cmd line Args
+
+Microsoft.AspNetCore.Hosting.Window
+
+>sc.exe create dotnetcoreservice binpath= "" - with exe file
+
+>sc query dotnetcoreservice
+>sc start dotnetcoreservice
+
+strps to create database using Entity framework
+------------------------------------------------
+C:\Users\Hvuser\Desktop\AllProjects\DotNetCore\EFCoreDemo\EFCoreDemo>dotnet ef database update
+C:\Users\Hvuser\Desktop\AllProjects\DotNetCore\EFCoreDemo\EFCoreDemo>dotnet ef migrations add "InitialCreate"
+
+C:\Users\Hvuser\Desktop\AllProjects\DotNetCore\ConfigurationDemo\ConfigurationDemo\bin\Debug\netcoreapp2.1\win10-x64\publish\ConfigurationDemo.exe
+
+
+3.3.1
+
+GalleryController
+upload image and caption
+<thumbnail 	="" caption="">
+
+
+app.UseMVC(optio)
+
+cache
+---------
+Inmemory
+Response - Attribute,middleware
+Distributed - redis, sqlserver
+
+
+<div class="row">
+    
+    
+    @foreach (var item in ViewBag.Images.Keys)
+    {
+    <thumbnail image-path=@ViewBag[item] caption=@item></thumbnail>
+    }
+
+</div>
+
+
+Microsoft.Extensions.Caching.Redis
+https://github.com/MicrosoftArchive/redis/releases
+https://fastoredis.com/anonim_users_downloads
+Micosoft.EntityFrameworkCore.Sqlite
+Microsoft.EntityFrameworkCore.design
+
+172.25.163.33
+
+Model
+------
+Binding 
+	Body
+	Routeparameter
+	querystring
+
+validation
+	Data annotation
+	Server Side Code
+	Self Validation
+	Client Validation
+	Remote validation
+UserInfo
+
+
+
+Server=(localdb)\mssqllocaldb;Database=ImageGallery;Trusted_Connection=True
+
+PM>Add-Migration "InitialCreate"
+PM> Update-Database
+
+Redis-x64-3.2.100
+fastoredis-1.18.2-x86_64
+
+
+Swagger(Swashbuckle.AspNetCore)
+----------
+Document toour API
+
+Swashbuckle.AspNetCore
+
+	Swashbuckle.AspNetCore.Swagger - core library
+	Swashbuckle.AspNetCore.SwaggerGen - create swagger.json which have the API details
+	Swashbuckle.AspNetCore.SwaggerUI - create UI with helpof swagger.json
+
+
+To Customize the swagger document the below steps needs to be done
+
+1. Need add the below in the project file by editing
+
+	<PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1951</NoWarn>
+  </PropertyGroup>
+
+2.Need to add pragma in program file like below
+ 	below namespace #pragma warning disable CS1591
+	end of the name space #pragma warning restore CS1591
+
+3. we have to add information in the xmlcomment
+
+4. Need to add the below in the AddSwaggerGen of ConfigureServices
+
+	 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+
+
+Calling API with bearer token
+--------------------
+index.html
+callback.html
+
+oid-client.js
+app.js
+
+------------------
+CLI command
+--------------------
+dotnet ef migrations add InitialPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb
+
+dotnet ef migrations add InitialConfigurationGrantDbMigration -c ConfigurationDbContext -o Data/Migrations/IdentityServer/ConfigurationDb
+-----------------------------------------------
+
+Need to run the below command for storing data into the dabase for identity server
+---------------------------------------------
+
+Add-Migration InitialPersistedGrantDbMigration -c PersistedGrantDbContext
+Add-Migration InitialConfigurationGrantDbMigration -c ConfigurationDb
+
+Update-Database -c PersistedGrantDbContext
+Update-Database -c ConfigurationDb
+
+
+Microservice
+-----------
+deployment
+scalable
+language
+security
+
+
+Docker
+-----------
+docker pull microsoft/dotnet:2.1-sdk
+docker pull microsoft/dotnet:2.1-aspnetcore-runtime
+
+docker build -t <imagename> - to create image
+		imagename format <somename>:<tagname> ex blogAPI:v1
+
+docker build -t <imagename> .
+
+docker tag <source> <destination> - to rename the image name
+docker images - list the availabe images
+docker ps - list the running process
+docker ps -a - list all the running and stopeed process
+docker rmi <imageid> - to remove single image
+docker rmi <imageid> -f - to remove image forcefully
+docker rmi <imageid> <imageid> - to remove more images
+docker stop <containerid> - to stop process
+docker rm <containerid> - to remove process
+docker stop <containerid> -f - to remove process forcefully
+
+Docker File
+-----------
+FROM <baseimage>
+LABEL <comits> - meta data
+RUN dotnet restore - run some commands
+RUN dotnet build
+RUN dotnet publish
+
+RUN dotnet restore && dotnet build && dotnet publish - execute multiple commands in single Run which happen at the time of build
+
+ENV <key> <value>
+WORKDIR <folder path>
+COPY <sourece> <destination> -> src refer localmachine and dest refer Image
+CMD <command argument> - execute at run time
+EXPOSE <portnumber>
+ENTRYPOINT <command> - no argument here
+
+docker build -t staticapp .
+docker images
+docker ps
+docker run -p 9090:80 staticapp
+docker ps
+docker stop e941
+docker ps
+docker ps -a
+docker rm e941
+
+Server=tcp:blogsdb.database.windows.net,1433;Initial Catalog=blogsdb;Persist Security Info=False;User ID=muthu10;Password=wELCOME0!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+
+
+Azure
+-------
+public cloud
+private cloud
+hybrid cloud
+
+Three types of Service
+IaaS - admin(IT pro)
+PaaS - developer
+SaaS - End user
+
+ARM - Azure Resource Manager - service deployemnt model
+	Resource Group
+	RBAC-roll based access control
+	Resource Template(ARM template)
+ASM - Azure service Management
+
+Ways to connect Azure 
+-----------------------------
+Portal
+CLI
+	Powershell
+	X-platform/Azure CLI
+ARM template
+SDK
+REST
+
+name
+RG name
+location
+
+Steps to deploy our application into Azure Cloud
+--------------------------------------------
+Dashborad
+	newdashboard
+		Name
+create new resource
+	web
+		webapp
+			create
+				App name - bstapp
+				subscription- 
+				Resource Groupname - select existing group
+				OS - windows
+				publish - code
+				app service plan/location - click
+					create new
+						name of appservice plan -myhexaAppPlan
+						location - southeast asia
+						pricing tier -click
+							select F1
+							click ok
+					
+				application insights - off
+
+	Click Create button
+
+
+Storage Account
+------------
+	500TB * 200
+	Storage
+		Blob(Page blob,Block blob)
+		table
+		Queue
+		Fileshare
+
+Blob
+-Container
+	we can specify the different blob types like append blob,block blob and page blob
+-Access policy
+ 	Blob(can access resource but no listing on browser)
+	container - can access with listing the filesin browser
+	private - need to pass token to accees the resource
+
+keys & SAS - Shared access signature
+
+Redundency
+------------
+LRS(locally redundent storage)
+ZrS(Zone)
+GRS(Geo)
+RA-GRS(Read access)
+
+Stored Access Policy - 
+
+COSMOS DB service
+-----------------
+1. NOSql
+2. API
+-----------
+	SQL(document Db)
+	mongoDb
+	cassendra
+	Table
+	graph
+3. SAL on multipe parameters(availability,throughput)
+4. Geo replications
+
+AccountEndpoint=https://mkrcosmos.documents.azure.com:443/;AccountKey=guULAsEviJw6zUKG2IWMmrevNrfXhRwybs9759wuCNuwPFXMkgHVrUm6xUPbOkEBiPiPl6jCXturY8kD93bT5A==;
+
+Microsoft.Azure.DocumentDB.Core
+	docker build -t imagegalley:v1
+
+Deployment of container in azure
+--------------------------------
+webapp for container(Dedicated server)
+Azure Container Instance(serverless)
+AKS - cluster
+Service fabric-cluster
+muthu10/imagegallery:v1
+
+
+Steps to deploy the imgage into container
+--------------------------------------------
+1.Add docker file in the application root path
+2. run  this command docker build -t imagegallery:v1  .
+3. run this command docker run -p imagegallery:v1
+now run the application and test it in local
+
+then run the below commands before that log in the docker hub(need tocreate account in docker hub)
+>docker push muthu10/imagegallery:v1
+go to azure portal and create conainer, follow the below steps
+Create Resource
+	Containers->Containerinstances
+			container name -> container image(muthu10/imagegallery:v1) -> Resource group -> location
+					  summary page -> DNS name ->click OK
+
+Go to container page where we could find FQDN where we can get the url to run our application.
+		 
+------------------
+
+Function & Logic App
+-----------
+piece of code
+execute independantly
+Faas(function as service)
+Event driven
+focus on code
+duration 5 mins(default-5,max 10 mins )
+plan
+	consumption plan
+	app service plan
+
+
+Function Autherization Level
+Admin - it allows only with host or master key
+Function - it allows both function key and master key
+Anonymous - it does not required any key
+
+4PKjxqLlEOISc5TeOa1JxWpInkVvNrPwiXFLEpIyz4vrh/at5Vbi/g==
+
+https://mkrfn.azurewebsites.net/api/HttpTriggerSample?name=muthu&code=4PKjxqLlEOISc5TeOa1JxWpInkVvNrPwiXFLEpIyz4vrh/at5Vbi/g==
+
+docker build -t mkrregistry.azurecr.io/identityserver .
+docker push mkrregistry.azurecr.io/identityserver
+
+docker build -t mkrregistry.azurecr.io/blogclient .
+docker push mkrregistry.azurecr.io/blogclient
+docker build -t mkrregistry.azurecr.io/blogapi .
+docker build -t mkrregistry.azurecr.io/blogapi
+
+Service Fabric
+---------------
+https://dev.azure.com/41353/_git/SampleProject
+
+
+http://redis.io
+Port number 6379
+
+
+docker build -t basketapi .
+docker build -t catalogapi .
+docker push mkrregistry.azurecr.io/blogclient
+docker build -t mkrregistry.azurecr.io/blogapi .
+docker build -t mkrregistry.azurecr.io/blogapi
